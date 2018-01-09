@@ -6,14 +6,14 @@ public class Fractal : MonoBehaviour
 {
 
     public Material material;
-	public Mesh[] meshes;
+    public Mesh[] meshes;
     public int maxDepth;
     public float childScale;
     public float spawnProbability;
-	public float maxRotationSpeed;
-	public float maxTwist;
-	
-	private float rotationSpeed;
+    public float maxRotationSpeed;
+    public float maxTwist;
+
+    private float rotationSpeed;
     private int depth;
     private static Vector3[] childDirections =
     {
@@ -51,8 +51,8 @@ public class Fractal : MonoBehaviour
 
     private void Start()
     {
-		rotationSpeed = Random.Range(-maxRotationSpeed, maxRotationSpeed);
-		transform.Rotate(Random.Range(-maxTwist, maxTwist), 0f, 0f);
+        rotationSpeed = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+        transform.Rotate(Random.Range(-maxTwist, maxTwist), 0f, 0f);
 
         if (materials == null)
         {
@@ -61,16 +61,17 @@ public class Fractal : MonoBehaviour
 
         gameObject.AddComponent<MeshFilter>().mesh = meshes[Random.Range(0, meshes.Length)];
         gameObject.AddComponent<MeshRenderer>().material = materials[depth, Random.Range(0, 2)];
-        
-		if (depth < maxDepth)
+
+        if (depth < maxDepth)
         {
             StartCoroutine(CreateChildren());
         }
     }
 
-	private void Update () {
-		transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);
-	}
+    private void Update()
+    {
+        transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);
+    }
 
     IEnumerator CreateChildren()
     {
@@ -91,8 +92,8 @@ public class Fractal : MonoBehaviour
         maxDepth = parent.maxDepth;
         depth = parent.depth + 1;
         spawnProbability = parent.spawnProbability;
-		maxRotationSpeed = parent.maxRotationSpeed;
-		maxTwist = parent.maxTwist;
+        maxRotationSpeed = parent.maxRotationSpeed;
+        maxTwist = parent.maxTwist;
         childScale = parent.childScale;
         transform.parent = parent.transform;
         transform.localScale = Vector3.one * childScale;
