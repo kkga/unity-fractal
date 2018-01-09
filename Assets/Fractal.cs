@@ -33,7 +33,7 @@ public class Fractal : MonoBehaviour
     };
     private Material[,] materials;
 
-    private void InitializeMaterials()
+    void InitializeMaterials()
     {
         materials = new Material[maxDepth + 1, 2];
         for (int i = 0; i <= maxDepth; i++)
@@ -49,7 +49,7 @@ public class Fractal : MonoBehaviour
         materials[maxDepth, 1].color = Color.red;
     }
 
-    private void Start()
+    void Start()
     {
         rotationSpeed = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         transform.Rotate(Random.Range(-maxTwist, maxTwist), 0f, 0f);
@@ -68,7 +68,7 @@ public class Fractal : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Update()
     {
         transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);
     }
